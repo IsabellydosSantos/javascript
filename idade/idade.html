@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Classificador Etário</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f4f4f4;
+    }
+    #container {
+        text-align: center;
+    }
+    input {
+        margin-bottom: 10px;
+        padding: 5px;
+    }
+    button {
+        padding: 8px 20px;
+        background-color: #000000;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+<div id="container">
+    <h2>Classificador Etário</h2>
+    <!-- Campos de entrada para nome e idade -->
+    <input type="text" id="nameInput" placeholder="Nome">
+    <input type="number" id="ageInput" placeholder="Idade">
+    <!-- Botão para acionar a função de classificação -->
+    <button onclick="classifyAge()">Classificar</button>
+    <!-- Parágrafo para exibir o resultado da classificação -->
+    <p id="result"></p>
+</div>
+
+<script>
+    // Função para classificar a idade
+    function classifyAge() {
+        // Obter o nome e a idade inseridos pelo usuário
+        var name = document.getElementById("nameInput").value;
+        var age = parseInt(document.getElementById("ageInput").value);
+        var resultElement = document.getElementById("result");
+        
+        // Verificar se a idade é um número válido e maior ou igual a zero
+        if (isNaN(age) || age < 0) {
+            resultElement.innerText = "Por favor, insira uma idade válida.";
+            return;
+        }
+        
+        var classification = "";
+        
+        // Classificar a idade com base nas categorias especificadas
+        if (age <= 10) {
+            classification = "criança";
+        } else if (age === 11) {
+            classification = "pré-adolescente";
+        } else if (age >= 12 && age <= 17) {
+            classification = "adolescente";
+        } else if (age >= 18 && age <= 60) {
+            classification = "adulto";
+        } else {
+            classification = "idoso";
+        }
+        
+        // Verificar se a pessoa está na maioridade penal (18 anos ou mais)
+        var isAdult = age >= 18 ? "está" : "não está";
+        
+        // Exibir o resultado da classificação
+        resultElement.innerText = "Olá, " + name + "! Você é um(a) " + classification + " e " + isAdult + " na maioridade penal.";
+    }
+</script>
+</body>
+</html>
